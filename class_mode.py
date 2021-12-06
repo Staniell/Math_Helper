@@ -62,6 +62,12 @@ class Grouped_Data:
             if i == n:
                 return key
         raise IndexError("dictionary index out of range") 
+    
+    def mean(self, data):
+        pass
+
+    def mode(self,data):
+        pass
 
     def percentile(self,k,data):
         # Add the frequency value of the first index
@@ -107,9 +113,9 @@ class Grouped_Data:
             fx += data[i][0]*(min(i)+max(i))/2
             fx2 += data[i][0]*((min(i)+max(i))/2)**2
         
-        variance = (fx2 - ((fx)**2/n))/n-1
-        print(f"fx:{fx}\tfx2:{fx2}\nn:{n}\tvariance:{variance}")
-
+        variance = ((fx2 - ((fx)**2/n)))/(n-1)
+        print(f"fx:{fx}\tfx2:{fx2}\nn:{n}\tSample Variance:{variance}\nSample SD:{math.sqrt(variance)}")
+        
 x = Grouped_Data()
 
 x.sample_variance({range(40,50):[3], range(50,60):[5], range(60,70):[6], range(70,80):[9],
