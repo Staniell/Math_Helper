@@ -15,11 +15,22 @@ class Central_Tendency:
         k = dict(sorted(numbers.items(),key=lambda x:x[1],reverse = True))
         print(k)
     
+    def mean(self, array):
+        print(sum(array)/len(array))
+    
+    def median(self, array):
+        mid = len(array)//2
+        if len(array) % 2 != 0:
+            print(sorted(array)[mid])
+        else:
+            print((sorted(array)[mid]+sorted(array)[mid-1])/2)
 
 class Variation_Measure:
+    def mean(self, array):
+        return sum(array)/len(array)
     def pop_variance(self,data):
         # data = [10,60,50,30,40,20]
-        mean = sum(data)/len(data)
+        mean = self.mean(data)
         variance = 0
 
         for i in data:
@@ -30,7 +41,7 @@ class Variation_Measure:
 
     def sample_variance(self,data):
         # data = [16,19,15,15,14]
-        mean = sum(data)/len(data)
+        mean = self.mean(data)
         variance = 0
 
         for i in data:
@@ -38,10 +49,15 @@ class Variation_Measure:
         variance=variance/(len(data)-1)
 
         print(f'Mean:{mean}\nVariance:{variance}\nSD:{math.sqrt(variance)}')
+        return math.sqrt(variance)
 
     #z score
-
-
+    def z_score(self,array,zscore, pop_variance=True):
+        if pop_variance:
+            result = (zscore-self.mean(array))/self.pop_variance(array)
+        else:
+            result = (zscore-self.mean(array))/self.sample_variance(array)
+        print(f"Z-Score: {result}")
 
     #percentile rank
     def percentile(self,find, scores):
@@ -116,10 +132,13 @@ class Grouped_Data:
         variance = ((fx2 - ((fx)**2/n)))/(n-1)
         print(f"fx:{fx}\tfx2:{fx2}\nn:{n}\tSample Variance:{variance}\nSample SD:{math.sqrt(variance)}")
         
-x = Grouped_Data()
+x = Variation_Measure()
+x.sample_variance([270,279,195,284,231,190,205,225])
 
-x.sample_variance({range(40,50):[3], range(50,60):[5], range(60,70):[6], range(70,80):[9],
-range(80,90):[8], range(90,100):[7]})
+
+
+# x.sample_variance({range(40,50):[3], range(50,60):[5], range(60,70):[6], range(70,80):[9],
+# range(80,90):[8], range(90,100):[7]})
 
 
 
