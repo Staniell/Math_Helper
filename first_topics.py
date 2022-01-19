@@ -14,15 +14,19 @@ class Central_Tendency:
 
         k = dict(sorted(numbers.items(),key=lambda x:x[1],reverse = True))
         print(k)
+        return str(k)
     
     def mean(self, array):
         print(sum(array)/len(array))
+        return str(sum(array)/len(array))
     
     def median(self, array):
         mid = len(array)//2
         if len(array) % 2 != 0:
             print(sorted(array)[mid])
+            return str(sorted(array)[mid])
         else:
+            return str((sorted(array)[mid]+sorted(array)[mid-1])/2)
             print((sorted(array)[mid]+sorted(array)[mid-1])/2)
 
 class Variation_Measure:
@@ -30,6 +34,8 @@ class Variation_Measure:
         return sum(array)/len(array)
     def pop_variance(self,data):
         # data = [10,60,50,30,40,20]
+        # data = data.strip()
+        # data = list(map(int, data.split(" ")))
         mean = self.mean(data)
         variance = 0
 
@@ -37,10 +43,13 @@ class Variation_Measure:
             variance += (i-mean)*(i-mean)
         variance=variance/len(data)
 
-        print(f'Mean:{mean}\nVariance:{variance}\nSD:{math.sqrt(variance)}')
+        string_result = f"Mean: {mean}\nVariance: {variance}\nSD: {math.sqrt(variance)}"
+        return string_result
 
-    def sample_variance(self,data):
+    def sample_variance(self,data, isForResult=False):
         # data = [16,19,15,15,14]
+        # data = data.strip()
+        # data = list(map(int, data.split(" ")))
         mean = self.mean(data)
         variance = 0
 
@@ -49,7 +58,10 @@ class Variation_Measure:
         variance=variance/(len(data)-1)
 
         print(f'Mean:{mean}\nVariance:{variance}\nSD:{math.sqrt(variance)}')
-        return math.sqrt(variance)
+        if isForResult:
+            return f'Mean: {mean}\nVariance: {variance}\nSD: {math.sqrt(variance)}'
+        else:
+            return math.sqrt(variance)
 
     #z score
     def z_score(self,array,zscore, pop_variance=True):
@@ -131,10 +143,23 @@ class Grouped_Data:
         
         variance = ((fx2 - ((fx)**2/n)))/(n-1)
         print(f"fx:{fx}\tfx2:{fx2}\nn:{n}\tSample Variance:{variance}\nSample SD:{math.sqrt(variance)}")
-        
-x = Variation_Measure()
-x.sample_variance([270,279,195,284,231,190,205,225])
+        print(data)
 
+# x = Variation_Measure()
+# x.pop_variance([2,4,6,8])
+
+
+
+
+# x = Variation_Measure()
+# x.sample_variance([499.2 , 555.2 , 398.8 , 391.9 , 453.4 , 459.8 , 483.7 , 417.6,  469.2,  558.6,
+
+# 452.4 , 499.3,  340.6,  522.8 , 469.9 , 527.2 , 565.5,  584.1,  727.3  ,408.1])
+
+# x = Grouped_Data()
+# x.sample_variance({range(10,16):[9], range(16,22):[13], range(22,28):[8], range(28, 34):[8],range(34,40):[8]})
+# x.percentile(70,{range(40,50):[3], range(50,60):[5], range(60,70):[6], range(70,80):[9],
+# range(80,90):[8],range(90,100):[7]})
 
 
 # x.sample_variance({range(40,50):[3], range(50,60):[5], range(60,70):[6], range(70,80):[9],
